@@ -3,10 +3,17 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
-
-    <TextView
+    <Button
+        android:id="@+id/buttonAdd"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:textSize="12sp"
+		android:text="Add"
+        />
+    <ListView
+        android:id="@+id/list"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/hello" />
-
+        android:layout_height="fill_parent"
+        >
+    </ListView>
 </LinearLayout>
