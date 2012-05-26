@@ -1,1 +1,18 @@
-- 새로운 구성원 추가에서 전화번호부에 데이터가 하나도 없을 경우 현재 소스로 돌리면 죽는다.
+새로운 구성원 추가에서 전화번호부에 데이터가 하나도 없을 경우 현재 소스로 돌리면 죽는다.
+
+get call log
+get sms log
+
+member - text ? side effect ?? private field 에 바로 접근하고 있다.
+member list adapter 에서 R.layout.member_list_row 두 번 사용하고 있음
+ArrayAdapter 상속 말고 BaseAdapter 상속? 
+getMembers() - DB 이용하여 제대로 구현하기.
+
+
+- member db oncreate table 변수 맘에 안듬.
+- member 의 데이터 베이스 헬퍼 만들기
+- notepad Sample 중에 위의 컴포넌트의 데이터가 없을 경우 출력되는 것이 있던데..
+
+커서 이용해서 값 가져오기.
+
+=================
