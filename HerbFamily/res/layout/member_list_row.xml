@@ -7,7 +7,7 @@
         android:id="@+id/flowerpot"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/pot" 
+        android:src="@drawable/pot2" 
         />
     <TextView
 		android:layout_width="fill_parent"

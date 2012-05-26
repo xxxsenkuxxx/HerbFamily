@@ -22,11 +22,12 @@ public class HerbFamilyActivity extends Activity {
 
 		ListView listView = (ListView) findViewById(R.id.list);
 		listView.setAdapter(new MemberListAdapter(this));
-		
-		Button button = (Button)findViewById(R.id.buttonAdd);
+
+		Button button = (Button) findViewById(R.id.buttonAdd);
 		button.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
-				Intent intent = new Intent(HerbFamilyActivity.this, NewMemberListActivity.class);
+				Intent intent = new Intent(HerbFamilyActivity.this,
+						NewMemberListActivity.class);
 				startActivity(intent);
 			}
 		});
