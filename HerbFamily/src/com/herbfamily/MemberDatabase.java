@@ -48,6 +48,14 @@ public class MemberDatabase {
 		values.put("nickname", nickname);
 		return db.insert(TABLE_NAME, null, values);
 	}
+	
+	public long addMember(String name, String nickname, String phoneNumber) {
+		ContentValues values = new ContentValues();
+		values.put("name", name);
+		values.put("nickname", nickname);
+		values.put("phone_number", phoneNumber);
+		return db.insert(TABLE_NAME, null, values);
+	}
 
 	private class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -64,7 +72,8 @@ public class MemberDatabase {
 			db.execSQL("CREATE TABLE " + TABLE_NAME + " (" +
 					"_id INTEGER PRIMARY KEY AUTOINCREMENT," +
 					"name TEXT NOT NULL," +
-					"nickname TEXT NOT NULL DEFAULT '')");
+					"nickname TEXT NOT NULL DEFAULT ''," + 
+					"phone_number TEXT NOT NULL DEFAULT '')");
 		}
 	
 		@Override
@@ -75,6 +84,8 @@ public class MemberDatabase {
 			}
 		}
 	}
+
+	
 
 	
 

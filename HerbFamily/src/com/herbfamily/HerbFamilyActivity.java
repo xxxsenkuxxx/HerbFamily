@@ -48,16 +48,6 @@ public class HerbFamilyActivity extends ListActivity {
 				startActivity(intent);
 			}
 		});
-		
-		Button buttonAddSample = (Button) findViewById(R.id.buttonAddSample);
-		buttonAddSample.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View view) {
-				if (-1 != database.addSampleMember("name", "nickname")) {
-					members = database.getMembers();
-					adapter.notifyDataSetChanged();
-				}
-			}
-		});
 	}
 
 	private class MemberListAdapter extends ArrayAdapter<Member> {

@@ -19,6 +19,7 @@ public class NewMemberListActivity extends Activity {
 		setContentView(R.layout.new_member_list);
 		
 		Intent intent = new Intent(this, NewMemberFormActivity.class);
+		startActivity(intent);
 		
 		return;
 		
