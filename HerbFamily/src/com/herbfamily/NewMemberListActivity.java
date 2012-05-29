@@ -1,10 +1,10 @@
 package com.herbfamily;
 
 import android.app.Activity;
+
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.Contacts;
 import android.provider.ContactsContract;
 import android.util.Log;
 
