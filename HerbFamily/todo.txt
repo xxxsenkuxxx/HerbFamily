@@ -1,1 +1,19 @@
-- 새로운 구성원 추가에서 전화번호부에 데이터가 하나도 없을 경우 현재 소스로 돌리면 죽는다.
+새로운 구성원 추가에서 전화번호부에 데이터가 하나도 없을 경우 현재 소스로 돌리면 죽는다.
+
+get call log
+get sms log
+
+member - text ? side effect ?? private field 에 바로 접근하고 있다.
+member list adapter 에서 R.layout.member_list_row 두 번 사용하고 있음
+ArrayAdapter 상속 말고 BaseAdapter 상속? 
+getMembers() - DB 이용하여 제대로 구현하기.
+
+커서 이용해서 값 가져오기.
+
+구성원 추가 - 이름/별명/전화번호
+	=> 추가하고 나서 목록으로 돌아가도 변경이 안되어 있네 ^^;;
+	=> 이름/별명/전화번호 유효성 체크하지 않음
+	
+		
+
+=================
