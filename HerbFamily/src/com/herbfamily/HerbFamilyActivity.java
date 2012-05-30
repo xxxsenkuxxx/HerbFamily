@@ -2,7 +2,6 @@ package com.herbfamily;
 
 import java.util.ArrayList;
 
-import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
@@ -10,9 +9,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 
 public class HerbFamilyActivity extends ListActivity {
@@ -50,20 +48,25 @@ public class HerbFamilyActivity extends ListActivity {
 		});
 	}
 
-	private class MemberListAdapter extends ArrayAdapter<Member> {
+	private class MemberListAdapter extends BaseAdapter {
 		private Context context;
 
 		public MemberListAdapter(Context context) {
-			super(context, R.layout.member_list_row);
 			this.context = context;
 		}
 
-		@Override
 		public int getCount() {
 			return members.size();
 		}
+		
+		public Object getItem(int position) {
+			return position;
+		}
 
-		@Override
+		public long getItemId(int position) {
+			return position;
+		}
+
 		public View getView(int position, View convertView, ViewGroup parent) {
 			ViewHolder holder;
 			if (convertView == null) {
