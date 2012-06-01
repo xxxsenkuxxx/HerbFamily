@@ -41,20 +41,42 @@ public class NewMemberListActivity extends ListActivity {
 		}
 		
 		while (cursor.moveToNext()) {
-			int id = cursor.getInt(cursor.getColumnIndex(ContactsContract.Contacts._ID));
-			String name = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
-			contacts.add(new Contact(id, name));
+			int contactId = cursor.getInt(cursor.getColumnIndex(ContactsContract.Contacts._ID));
+			String contactName = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+			String phoneNumber = getPhoneNumber(contactId);
+			contacts.add(new Contact(contactId, contactName, phoneNumber));
 		}
 		cursor.close();
-		
 		return contacts;
 	}
+
+	private String getPhoneNumber(int contactId) {
+		String phoneNumber = "";
+		Cursor phoneCursor = getPhoneCursor(contactId);
+		if (phoneCursor != null) {
+			if (phoneCursor.moveToNext()) {
+				phoneNumber = phoneCursor.getString(phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+			}
+			phoneCursor.close();
+		}
+		return phoneNumber;
+	}
 	
+	private Cursor getPhoneCursor(int contactId) {
+		String [] projection = new String[] {
+				ContactsContract.CommonDataKinds.Phone.CONTACT_ID,
+				ContactsContract.CommonDataKinds.Phone.NUMBER
+		};
+		return managedQuery(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, projection, ContactsContract.CommonDataKinds.Phone.CONTACT_ID + "=" + contactId, null, null);
+	}
+
 	private Cursor getContactsCursor() {
 		String [] projection = new String[] {
 				ContactsContract.Contacts._ID,
-				ContactsContract.Contacts.DISPLAY_NAME
+				ContactsContract.Contacts.DISPLAY_NAME,
+				ContactsContract.Contacts.HAS_PHONE_NUMBER
 		};
+		
 		String selection = ContactsContract.Contacts.IN_VISIBLE_GROUP + " = '1'";
 		String sortOrder = ContactsContract.Contacts.DISPLAY_NAME + " COLLATE LOCALIZED ASC";
 		
@@ -65,7 +87,10 @@ public class NewMemberListActivity extends ListActivity {
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
 		Intent intent = new Intent(this, NewMemberFormActivity.class);
-		intent.putExtra("contactId", ((Contact)contacts.get(position)).getId());
+		Contact contact = (Contact)contacts.get(position);
+		intent.putExtra("contactId", contact.getId());
+		intent.putExtra("contactName", contact.getName());
+		intent.putExtra("contactPhoneNumber", contact.getPhoneNumber());
 		startActivity(intent);
 	}
 
@@ -101,7 +126,7 @@ public class NewMemberListActivity extends ListActivity {
 			}
 			
 			Contact contact = (Contact)contacts.get(position);
-			holder.contactName.setText(contact.getName());
+			holder.contactName.setText(contact.getName() + "(" + contact.getPhoneNumber() + ")");
 			return convertView;
 		}
 		

@@ -20,31 +20,16 @@ public class NewMemberFormActivity extends Activity {
 		setContentView(R.layout.new_member_form);
 		
 		int contactId = getIntent().getIntExtra("contactId", 0);
+		String name = getIntent().getStringExtra("contactName");
+		String phoneNumber = getIntent().getStringExtra("contactPhoneNumber");
+		
+		contact = new Contact(contactId, name, phoneNumber);
+		
 		if (contactId == 0) {
 			finish();
 		}
 		
-		contact = getContact(contactId);
-		if (contact == null) {
-			finish();
-		}
 		setupWidgets();
-	}
-
-	private Contact getContact(int contactId) {
-		Contact contact = null;
-		Cursor cursor = getContactCursor(contactId);
-		if (cursor == null) {
-			return contact;
-		}
-		
-		if (cursor.moveToFirst()) {
-			int id = cursor.getInt(cursor.getColumnIndex(ContactsContract.Contacts._ID));
-			String name = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
-			contact = new Contact(id, name);
-		}
-		cursor.close();
-		return contact;
 	}
 
 	private Cursor getContactCursor(int contactId) {
@@ -59,8 +44,11 @@ public class NewMemberFormActivity extends Activity {
 	
 	private void setupWidgets() {
 		
-		TextView name = (TextView)findViewById(R.id.editTextName);
-		name.setText(contact.getName());
+		EditText editTextName = (EditText)findViewById(R.id.editTextName);
+		editTextName.setText(contact.getName());
+		
+		EditText editTextPhoneNumber = (EditText)findViewById(R.id.editTextPhoneNumber);
+		editTextPhoneNumber.setText(contact.getPhoneNumber());
 		
 		Button buttonSave = (Button)findViewById(R.id.buttonSave);
 		buttonSave.setOnClickListener(new View.OnClickListener() {
