@@ -32,16 +32,6 @@ public class NewMemberFormActivity extends Activity {
 		setupWidgets();
 	}
 
-	private Cursor getContactCursor(int contactId) {
-		String [] projection = new String[] {
-				ContactsContract.Contacts._ID,
-				ContactsContract.Contacts.DISPLAY_NAME,
-		};
-		String selection = ContactsContract.Contacts._ID + " = " + contactId;
-		
-		return managedQuery(ContactsContract.Contacts.CONTENT_URI, projection, selection, null, null);
-	}
-	
 	private void setupWidgets() {
 		
 		EditText editTextName = (EditText)findViewById(R.id.editTextName);

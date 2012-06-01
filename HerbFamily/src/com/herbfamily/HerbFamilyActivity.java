@@ -17,23 +17,27 @@ public class HerbFamilyActivity extends ListActivity {
 	
 	private MemberListAdapter adapter;
 	private ArrayList<Member> members;
-	private MemberDatabase database;
 	
-	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		
-		database = new MemberDatabase(this);
+	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+
+		//TODO onResume 에서 계속해서 DB 를 읽게 되네, 별로 좋치 않다. - NewForm 에서 activity return 값을 reflash 해야 겠다.
+		MemberDatabase database = new MemberDatabase(this);
 		members = database.getMembers();
+		database.close();
 		setupWidgets();
 	}
 
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		database.close();
 	}
 
 	private void setupWidgets() {
