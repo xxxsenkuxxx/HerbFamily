@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class MemberDatabase {
 	
-	private static final String DATABASE_NAME = "member.db";
+	private static final String DATABASE_NAME = "database.db";
 	private static final String TABLE_NAME = "members";
 	private static final int DATABASE_VERSION = 1;
 	private DatabaseHelper databaseHelper;
@@ -71,6 +71,7 @@ public class MemberDatabase {
 		private void createMemberTable(SQLiteDatabase db) {
 			db.execSQL("CREATE TABLE " + TABLE_NAME + " (" +
 					"_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+					"group_id INTEGER NOT NULL DEFAULT 0," +
 					"name TEXT NOT NULL," +
 					"nickname TEXT NOT NULL DEFAULT ''," + 
 					"phone_number TEXT NOT NULL DEFAULT '')");

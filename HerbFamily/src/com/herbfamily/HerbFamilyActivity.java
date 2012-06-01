@@ -52,8 +52,8 @@ public class HerbFamilyActivity extends ListActivity {
 			}
 		});
 		
-		Button buttonAddGroup = (Button)findViewById(R.id.buttonAddGroup);
-		buttonAddGroup.setOnClickListener(new View.OnClickListener() {
+		Button buttonOpenGroupAddition = (Button)findViewById(R.id.buttonOpenGroupAddidtion);
+		buttonOpenGroupAddition.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				Intent intent = new Intent(HerbFamilyActivity.this, NewGroupActivity.class);
 				startActivity(intent);
