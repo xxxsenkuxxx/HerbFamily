@@ -13,7 +13,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class HerbFamilyActivity extends ListActivity {
+public class HerbFamilyActivity extends ListActivity implements View.OnClickListener {
 	
 	private MemberListAdapter adapter;
 	private ArrayList<Member> members;
@@ -44,23 +44,22 @@ public class HerbFamilyActivity extends ListActivity {
 	private void setupWidgets() {
 		adapter = new MemberListAdapter(this);
 		setListAdapter(adapter);
-		Button buttonAdd = (Button)findViewById(R.id.buttonAdd);
-		buttonAdd.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View view) {
-				Intent intent = new Intent(HerbFamilyActivity.this, NewMemberListActivity.class);
-				startActivity(intent);
-			}
-		});
 		
-		Button buttonOpenGroupAddition = (Button)findViewById(R.id.buttonOpenGroupAddidtion);
-		buttonOpenGroupAddition.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				Intent intent = new Intent(HerbFamilyActivity.this, NewGroupActivity.class);
-				startActivity(intent);
-			}
-		});
+		((Button)findViewById(R.id.buttonOpenMemberAddition)).setOnClickListener(this);
+		((Button)findViewById(R.id.buttonOpenGroupAddidtion)).setOnClickListener(this);
 	}
-
+	
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.buttonOpenMemberAddition:
+			startActivity(new Intent(this, NewMemberListActivity.class));
+			break;
+		case R.id.buttonOpenGroupAddidtion:
+			startActivity(new Intent(this, NewGroupActivity.class));
+			break;
+		}
+	}
+	
 	private class MemberListAdapter extends BaseAdapter {
 		private Context context;
 
@@ -103,4 +102,6 @@ public class HerbFamilyActivity extends ListActivity {
 			private TextView text;
 		}
 	}
+
+	
 }

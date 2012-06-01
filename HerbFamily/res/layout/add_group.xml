@@ -14,13 +14,13 @@
         android:layout_height="wrap_content"
         android:textSize="14sp" />
 	<Button
-	    android:id="@+id/buttonNewGroup"
+	    android:id="@+id/buttonAddNewGroup"
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
 	    android:textSize="14sp"
 	    android:text="Create Group"/>
 	<Button
-	    android:id="@+id/buttonNewGroupCancel"
+	    android:id="@+id/buttonCancelGroup"
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
 	    android:textSize="14sp"

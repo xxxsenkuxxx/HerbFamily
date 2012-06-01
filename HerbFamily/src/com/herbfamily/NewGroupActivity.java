@@ -11,13 +11,13 @@ public class NewGroupActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.add_group);
 		
-		Button buttonAddGroup = (Button)findViewById(R.id.buttonNewGroup);
+		Button buttonAddGroup = (Button)findViewById(R.id.buttonAddNewGroup);
 		buttonAddGroup.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 			}
 		});
 		
-		Button buttonGroupCancel = (Button)findViewById(R.id.buttonNewGroupCancel);
+		Button buttonGroupCancel = (Button)findViewById(R.id.buttonCancelGroup);
 		buttonGroupCancel.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				finish();
