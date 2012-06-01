@@ -1,13 +1,10 @@
 package com.herbfamily;
 
 import android.app.Activity;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 public class NewMemberFormActivity extends Activity {
 	

@@ -32,6 +32,7 @@ public class HerbFamilyActivity extends ListActivity {
 		MemberDatabase database = new MemberDatabase(this);
 		members = database.getMembers();
 		database.close();
+		
 		setupWidgets();
 	}
 
@@ -43,10 +44,18 @@ public class HerbFamilyActivity extends ListActivity {
 	private void setupWidgets() {
 		adapter = new MemberListAdapter(this);
 		setListAdapter(adapter);
-		Button buttonAdd = (Button) findViewById(R.id.buttonAdd);
+		Button buttonAdd = (Button)findViewById(R.id.buttonAdd);
 		buttonAdd.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
 				Intent intent = new Intent(HerbFamilyActivity.this, NewMemberListActivity.class);
+				startActivity(intent);
+			}
+		});
+		
+		Button buttonAddGroup = (Button)findViewById(R.id.buttonAddGroup);
+		buttonAddGroup.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				Intent intent = new Intent(HerbFamilyActivity.this, NewGroupActivity.class);
 				startActivity(intent);
 			}
 		});
