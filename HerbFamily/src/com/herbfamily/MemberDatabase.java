@@ -11,7 +11,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class MemberDatabase {
 	
 	private static final String DATABASE_NAME = "database.db";
-	private static final String TABLE_NAME = "members";
+	private static final String MEMBER_TABLE_NAME = "members";
+	private static final String GROUP_TABLE_NAME = "groups";
 	private static final int DATABASE_VERSION = 1;
 	private DatabaseHelper databaseHelper;
 	private SQLiteDatabase db;
@@ -28,7 +29,7 @@ public class MemberDatabase {
 	public ArrayList<Member> getMembers() {
 		ArrayList<Member> members = new ArrayList<Member>();
 		
-		Cursor cursor = db.query(TABLE_NAME, new String[]{"_id", "name", "nickname"}, null, null, null, null, null);
+		Cursor cursor = db.query(MEMBER_TABLE_NAME, new String[]{"_id", "name", "nickname"}, null, null, null, null, null);
 		if (cursor == null) {
 			return members;
 		}
@@ -42,19 +43,18 @@ public class MemberDatabase {
 		return members;
 	}
 	
-	public long addSampleMember(String name, String nickname) {
-		ContentValues values = new ContentValues();
-		values.put("name", name);
-		values.put("nickname", nickname);
-		return db.insert(TABLE_NAME, null, values);
-	}
-	
-	public long addMember(String name, String nickname, String phoneNumber) {
+	public boolean addMember(String name, String nickname, String phoneNumber) {
 		ContentValues values = new ContentValues();
 		values.put("name", name);
 		values.put("nickname", nickname);
 		values.put("phone_number", phoneNumber);
-		return db.insert(TABLE_NAME, null, values);
+		return db.insert(MEMBER_TABLE_NAME, null, values) != -1;
+	}
+	
+	public boolean addGroup(String name) {
+		ContentValues values = new ContentValues();
+		values.put("name", name);
+		return db.insert(GROUP_TABLE_NAME, null, values) != -1;
 	}
 
 	private class DatabaseHelper extends SQLiteOpenHelper {
@@ -66,22 +66,32 @@ public class MemberDatabase {
 		@Override
 		public void onCreate(SQLiteDatabase db) {
 			createMemberTable(db);
+			createGroupTable(db);
 		}
-
+		
 		private void createMemberTable(SQLiteDatabase db) {
-			db.execSQL("CREATE TABLE " + TABLE_NAME + " (" +
+			db.execSQL("CREATE TABLE " + MEMBER_TABLE_NAME + " (" +
 					"_id INTEGER PRIMARY KEY AUTOINCREMENT," +
 					"group_id INTEGER NOT NULL DEFAULT 0," +
 					"name TEXT NOT NULL," +
 					"nickname TEXT NOT NULL DEFAULT ''," + 
 					"phone_number TEXT NOT NULL DEFAULT '')");
 		}
+
+		private void createGroupTable(SQLiteDatabase db) {
+			db.execSQL("CREATE TABLE " + GROUP_TABLE_NAME + " (" +
+					"_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+					"name TEXT NOT NULL DEFAULT '')");
+		}
 	
 		@Override
 		public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 			if (oldVersion != newVersion) {
-	            db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+	            db.execSQL("DROP TABLE IF EXISTS " + MEMBER_TABLE_NAME);
+	            db.execSQL("DROP TABLE IF EXISTS " + GROUP_TABLE_NAME);
+	            
 	            createMemberTable(db);
+	            createGroupTable(db);
 			}
 		}
 	}

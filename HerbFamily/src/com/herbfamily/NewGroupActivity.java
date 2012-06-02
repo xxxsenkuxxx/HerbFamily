@@ -18,10 +18,15 @@ public class NewGroupActivity extends Activity implements View.OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.buttonAddNewGroup:
+			MemberDatabase database = new MemberDatabase(this);
+			database.addGroup("New Group");
+			database.close();
 			break;
 		case R.id.buttonCancelGroup:
 			finish();
 			break;
 		}
 	}
+	
+	
 }

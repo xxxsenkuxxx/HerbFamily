@@ -45,9 +45,13 @@ public class NewMemberFormActivity extends Activity {
 				EditText phoneNumber = (EditText)findViewById(R.id.editTextPhoneNumber);
 				
 				memberDatabase = new MemberDatabase(NewMemberFormActivity.this);
-				memberDatabase.addMember(name.getText().toString(), 
+				if (memberDatabase.addMember(name.getText().toString(), 
 						nickname.getText().toString(), 
-						phoneNumber.getText().toString());
+						phoneNumber.getText().toString())) {
+					//TODO success
+				} else {
+					//TODO fail
+				}
 				memberDatabase.close();
 				finish();
 			}

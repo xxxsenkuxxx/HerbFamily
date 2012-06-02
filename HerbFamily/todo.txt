@@ -25,8 +25,11 @@
 	Contact 와 Member 를 합칠 수 있을 거 같다.
 	메인 화면에서 onResume 에서 목록 업데이트 함 - activity return 값을 판별하게 수정할것.
 
-**	그룹관련 button 및 acitivity 이름 정리
 	그룹 추가 기능 완성하기
-	
+	그룹 추가시 실패 했을 경우.
+	MemberDatabase 에서 그룹 생성 테이블 기능이 들어 감 - activity 파일 명을 변경해 주어야 한다.
+
+	사용자 추가시에 실패 했을 경우 처리하기.
+		
 	
 =================
