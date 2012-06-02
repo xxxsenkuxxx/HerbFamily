@@ -1,6 +1,8 @@
 package com.herbfamily;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -45,12 +47,18 @@ public class NewMemberFormActivity extends Activity {
 				EditText phoneNumber = (EditText)findViewById(R.id.editTextPhoneNumber);
 				
 				memberDatabase = new MemberDatabase(NewMemberFormActivity.this);
-				if (memberDatabase.addMember(name.getText().toString(), 
+				if ( ! memberDatabase.addMember(name.getText().toString(), 
 						nickname.getText().toString(), 
 						phoneNumber.getText().toString())) {
-					//TODO success
-				} else {
-					//TODO fail
+					new AlertDialog.Builder(NewMemberFormActivity.this)
+					.setTitle("오류")
+					.setMessage("구성원을 추가 할 수 없습니다.")
+					.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int which) {
+							dialog.dismiss();
+							finish();
+						}
+					}).show();
 				}
 				memberDatabase.close();
 				finish();
