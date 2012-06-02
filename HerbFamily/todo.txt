@@ -1,1 +1,2 @@
 - 새로운 구성원 추가에서 전화번호부에 데이터가 하나도 없을 경우 현재 소스로 돌리면 죽는다.
+- member list adpater getCount 10 을 return 하게 되어 있음
