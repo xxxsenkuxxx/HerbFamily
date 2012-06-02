@@ -21,13 +21,11 @@ public class NewMemberFormActivity extends Activity {
 		int contactId = getIntent().getIntExtra("contactId", 0);
 		String name = getIntent().getStringExtra("contactName");
 		String phoneNumber = getIntent().getStringExtra("contactPhoneNumber");
-		
 		contact = new Contact(contactId, name, phoneNumber);
 		
 		if (contactId == 0) {
 			finish();
 		}
-		
 		setupWidgets();
 	}
 
