@@ -4,16 +4,19 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
     <Button
-        android:id="@+id/buttonAdd"
+        android:id="@+id/buttonOpenMemberAddition"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
-		android:textSize="12sp"
-		android:text="Add"
-        />
+		android:textSize="14sp"
+		android:text="Add" />
+   <Button
+		android:id="@+id/buttonOpenGroupAddidtion"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:textSize="14sp"
+		android:text="Add Group"/>
     <ListView
-        android:id="@+id/list"
+        android:id="@android:id/list"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        >
-    </ListView>
+        android:layout_height="wrap_content" />
 </LinearLayout>

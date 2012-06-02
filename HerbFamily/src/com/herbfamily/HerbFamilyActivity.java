@@ -1,58 +1,107 @@
 package com.herbfamily;
 
-import android.app.Activity;
+import java.util.ArrayList;
+
+import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.ListAdapter;
-import android.widget.ListView;
+import android.widget.TextView;
 
-public class HerbFamilyActivity extends Activity {
-	/** Called when the activity is first created. */
+public class HerbFamilyActivity extends ListActivity implements View.OnClickListener {
+	
+	private MemberListAdapter adapter;
+	private ArrayList<Member> members;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
 
-		ListView listView = (ListView) findViewById(R.id.list);
-		listView.setAdapter(new MemberListAdapter(this));
+		//TODO onResume 에서 계속해서 DB 를 읽게 되네, 별로 좋치 않다. - NewForm 에서 activity return 값을 reflash 해야 겠다.
+		MemberDatabase database = new MemberDatabase(this);
+		members = database.getMembers();
+		database.close();
 		
-		Button button = (Button)findViewById(R.id.buttonAdd);
-		button.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View view) {
-				Intent intent = new Intent(HerbFamilyActivity.this, NewMemberListActivity.class);
-				startActivity(intent);
-			}
-		});
+		setupWidgets();
 	}
 
-	private class MemberListAdapter extends ArrayAdapter {
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+	}
+
+	private void setupWidgets() {
+		adapter = new MemberListAdapter(this);
+		setListAdapter(adapter);
+		
+		((Button)findViewById(R.id.buttonOpenMemberAddition)).setOnClickListener(this);
+		((Button)findViewById(R.id.buttonOpenGroupAddidtion)).setOnClickListener(this);
+	}
+	
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.buttonOpenMemberAddition:
+			startActivity(new Intent(this, NewMemberListActivity.class));
+			break;
+		case R.id.buttonOpenGroupAddidtion:
+			startActivity(new Intent(this, NewGroupActivity.class));
+			break;
+		}
+	}
+	
+	private class MemberListAdapter extends BaseAdapter {
 		private Context context;
 
 		public MemberListAdapter(Context context) {
-			super(context, R.layout.member_list_row);
 			this.context = context;
 		}
 
-		@Override
 		public int getCount() {
-			return 10;
+			return members.size();
+		}
+		
+		public Object getItem(int position) {
+			return position;
 		}
 
-		@Override
+		public long getItemId(int position) {
+			return position;
+		}
+
 		public View getView(int position, View convertView, ViewGroup parent) {
+			ViewHolder holder;
 			if (convertView == null) {
 				LayoutInflater inflater = LayoutInflater.from(context);
 				convertView = inflater.inflate(R.layout.member_list_row, null);
+				
+				holder = new ViewHolder();
+				holder.text = (TextView)convertView.findViewById(R.id.memberName);
+				convertView.setTag(holder);
+			} else {
+				holder = (ViewHolder)convertView.getTag();
 			}
+			
+			Member member = (Member)members.get(position);
+			holder.text.setText(member.getName() + "(" + member.getNickname() + ")");
+			
 			return convertView;
 		}
-
+		
+		private class ViewHolder {
+			private TextView text;
+		}
 	}
+
+	
 }

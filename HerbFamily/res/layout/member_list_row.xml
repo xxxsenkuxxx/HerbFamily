@@ -2,17 +2,30 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical">
+    android:orientation="horizontal">
     <ImageView
         android:id="@+id/flowerpot"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/pot" 
+        android:src="@drawable/pot2" 
         />
-    <TextView
-		android:layout_width="fill_parent"
-		android:layout_height="fill_parent"
-		android:textSize="12sp"
-		android:text="Member"
-        />
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:orientation="vertical">
+	    <TextView
+	        android:id="@+id/memberName"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:textSize="12sp"
+			android:text="Member"
+	        />
+	    <TextView
+	        android:id="@+id/memberNickname"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:textSize="12sp"
+			android:text="Last Modified"
+	        />
+    </LinearLayout>
 </LinearLayout>
