@@ -46,6 +46,10 @@ public class NewMemberFormActivity extends Activity {
 				EditText nickname = (EditText)findViewById(R.id.editTextNickname);
 				EditText phoneNumber = (EditText)findViewById(R.id.editTextPhoneNumber);
 				
+				if(name.getText().toString()=="" || nickname.getText().toString()=="" || phoneNumber.getText().toString()=="") {
+					return;
+				}
+				
 				memberDatabase = new MemberDatabase(NewMemberFormActivity.this);
 				if ( ! memberDatabase.addMember(name.getText().toString(), 
 						nickname.getText().toString(), 
