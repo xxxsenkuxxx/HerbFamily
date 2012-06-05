@@ -17,7 +17,6 @@
         android:ems="10" >
         <requestFocus />
     </EditText>
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -42,12 +41,31 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="phone" />
-
-    <Spinner
-        android:id="@+id/spinner1"
+    <Button
+        android:id="@+id/buttonOpenGroupChoice"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
-
+        android:layout_height="wrap_content"
+        android:text="그룹"/>
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="주기"/>
+   	<Button
+   	    android:id="@+id/button2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="시간"/>
+	<Button
+   	    android:id="@+id/button3"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="방식"/>
+	<Button
+   	    android:id="@+id/button4"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="설정"/>
     <Button
         android:id="@+id/buttonSave"
         android:layout_width="fill_parent"

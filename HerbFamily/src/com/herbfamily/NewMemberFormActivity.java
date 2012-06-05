@@ -3,6 +3,7 @@ package com.herbfamily;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -38,6 +39,7 @@ public class NewMemberFormActivity extends Activity {
 		editTextPhoneNumber.setText(contact.getPhoneNumber());
 		
 		Button buttonSave = (Button)findViewById(R.id.buttonSave);
+		//TODO button listner 가 너무 길다.
 		buttonSave.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				EditText name = (EditText)findViewById(R.id.editTextName);
@@ -73,5 +75,15 @@ public class NewMemberFormActivity extends Activity {
 				finish();
 			}
 		});
+		
+		Button buttonOpenGroupChoice = (Button)findViewById(R.id.buttonOpenGroupChoice);
+		buttonOpenGroupChoice.setOnClickListener(new View.OnClickListener() {
+			
+			public void onClick(View v) {
+				Intent intent = new Intent(NewMemberFormActivity.this, GroupChoiceActivity.class);
+				startActivity(intent);
+			}
+		});
+		
 	}
 }

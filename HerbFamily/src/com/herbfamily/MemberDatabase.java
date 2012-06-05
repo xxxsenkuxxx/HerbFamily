@@ -43,6 +43,11 @@ public class MemberDatabase {
 		return members;
 	}
 	
+	public ArrayList<String> getGroups() {
+		ArrayList<String> groups = new ArrayList<String>();
+		return groups;
+	}
+	
 	public boolean addMember(String name, String nickname, String phoneNumber) {
 		ContentValues values = new ContentValues();
 		values.put("name", name);
@@ -56,7 +61,7 @@ public class MemberDatabase {
 		values.put("name", name);
 		return db.insert(GROUP_TABLE_NAME, null, values) != -1;
 	}
-
+	
 	private class DatabaseHelper extends SQLiteOpenHelper {
 
 		public DatabaseHelper(Context context) {
