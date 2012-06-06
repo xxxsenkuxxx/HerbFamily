@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 public class NewGroupActivity extends Activity implements View.OnClickListener {
 	@Override
@@ -19,7 +20,8 @@ public class NewGroupActivity extends Activity implements View.OnClickListener {
 		switch (v.getId()) {
 		case R.id.buttonAddNewGroup:
 			MemberDatabase database = new MemberDatabase(this);
-			database.addGroup("New Group");
+			EditText name = (EditText)findViewById(R.id.editTextGroupName);
+			database.addGroup(name.getText().toString());
 			database.close();
 			break;
 		case R.id.buttonCancelGroup:

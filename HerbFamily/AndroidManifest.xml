@@ -23,5 +23,6 @@
         <activity android:name=".NewMemberListActivity" android:theme="@android:style/Theme.NoTitleBar" android:screenOrientation="portrait"/>
         <activity android:name=".NewMemberFormActivity" android:theme="@android:style/Theme.NoTitleBar" android:screenOrientation="portrait"/>
         <activity android:name=".NewGroupActivity" android:theme="@android:style/Theme.NoTitleBar" android:screenOrientation="portrait"/>
+        <activity android:name=".GroupChoiceActivity" android:theme="@android:style/Theme.NoTitleBar" android:screenOrientation="portrait"/>
     </application>
 </manifest>

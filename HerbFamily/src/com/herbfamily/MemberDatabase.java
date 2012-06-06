@@ -45,6 +45,15 @@ public class MemberDatabase {
 	
 	public ArrayList<String> getGroups() {
 		ArrayList<String> groups = new ArrayList<String>();
+		
+		Cursor cursor = db.query(GROUP_TABLE_NAME, new String[]{"_id", "name"}, null, null, null, null, null);
+		if (cursor == null) {
+			return groups;
+		}
+		
+		while (cursor.moveToNext()) {
+			groups.add(cursor.getString(cursor.getColumnIndex("name")));
+		}
 		return groups;
 	}
 	
