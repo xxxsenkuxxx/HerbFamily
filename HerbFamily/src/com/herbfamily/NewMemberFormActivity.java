@@ -17,6 +17,7 @@ public class NewMemberFormActivity extends Activity implements View.OnClickListe
 	
 	private Button buttonOpenGroupChoice;
 	private static final String TAG = NewMemberFormActivity.class.getSimpleName();
+	private int groupId = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,7 @@ public class NewMemberFormActivity extends Activity implements View.OnClickListe
 		contact = new Contact(contactId, name, phoneNumber);
 		
 		if (contactId == 0) {
+			//TODO ??
 			finish();
 		}
 		setupWidgets();
@@ -51,13 +53,16 @@ public class NewMemberFormActivity extends Activity implements View.OnClickListe
 				EditText phoneNumber = (EditText)findViewById(R.id.editTextPhoneNumber);
 				
 				if(name.getText().toString()=="" || nickname.getText().toString()=="" || phoneNumber.getText().toString()=="") {
+					//TODO
+					//오류처리.
 					return;
 				}
 				
 				memberDatabase = new MemberDatabase(NewMemberFormActivity.this);
 				if ( ! memberDatabase.addMember(name.getText().toString(), 
 						nickname.getText().toString(), 
-						phoneNumber.getText().toString())) {
+						phoneNumber.getText().toString(),
+						groupId)) {
 					new AlertDialog.Builder(NewMemberFormActivity.this)
 					.setTitle("오류")
 					.setMessage("구성원을 추가 할 수 없습니다.")
@@ -82,14 +87,7 @@ public class NewMemberFormActivity extends Activity implements View.OnClickListe
 		
 		buttonOpenGroupChoice = (Button)findViewById(R.id.buttonOpenGroupChoice);
 		buttonOpenGroupChoice.setOnClickListener(this);
-//		buttonOpenGroupChoice.setOnClickListener(new View.OnClickListener() {
-//			public void onClick(View v) {
-//				
-//			}
-//		});
 	}
-	
-	
 	
 	public void onClick(View view) {
 		switch (view.getId()) {
@@ -103,17 +101,12 @@ public class NewMemberFormActivity extends Activity implements View.OnClickListe
 	@Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        // earlier in startSubActivity
         if (requestCode == GroupChoiceActivity.REQUEST_CODE) {
         	if (resultCode == RESULT_OK) {
-        		
-        		data.getIntExtra("groupId", 0);
+        		groupId = data.getIntExtra("groupId", 0);
         		buttonOpenGroupChoice.setText(data.getStringExtra("groupName"));
-        		
-        		Log.e(TAG, "onActivityResult["+GroupChoiceActivity.REQUEST_CODE+"]");
         	}
         }
     }
-
 	
 }

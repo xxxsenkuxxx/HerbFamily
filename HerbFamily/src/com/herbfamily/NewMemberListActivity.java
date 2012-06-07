@@ -29,7 +29,6 @@ public class NewMemberListActivity extends ListActivity {
 		//TODO 연락처에 추가된 사용자가 없으면 아무것도 나타나지 않는다. - 메시지 처리.
 		contacts = getContacts();
 		setListAdapter(new ContactsAdapter(this));
-		return;
 	}
 	
 	private ArrayList<Contact> getContacts() {

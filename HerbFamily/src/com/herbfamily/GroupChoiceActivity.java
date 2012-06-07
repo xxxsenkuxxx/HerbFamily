@@ -16,37 +16,32 @@ import android.widget.TextView;
 
 public class GroupChoiceActivity extends ListActivity {
 	
-	protected static final int REQUEST_CODE = 1;
-	ArrayList<Group>groups = null;
+	public static final int REQUEST_CODE = 1;
+	private ArrayList<Group>groups = null;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.choice_group);
 		
+		init();
+		setupWidgets();
+	}
+	
+	private void init() {
 		MemberDatabase database = new MemberDatabase(this);
 		groups = database.getGroups();
-		
-		Button buttonClose = (Button)findViewById(R.id.buttonCloseChoiceGroup);
-		buttonClose.setOnClickListener(new View.OnClickListener() {
+		database.close();
+	}
+
+	private void setupWidgets() {
+		((Button)findViewById(R.id.buttonCloseChoiceGroup)).setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
 				finish();
 			}
 		});
+		
 		setListAdapter(new GroupListAdapter(this));
-	}
-	
-	@Override
-	protected void onListItemClick(ListView l, View v, int position, long id) {
-		super.onListItemClick(l, v, position, id);
-		
-		Group group = groups.get(position);
-		
-		Intent intent = new Intent();
-		intent.putExtra("groupId", group.getId());
-		intent.putExtra("groupName", group.getName());
-		setResult(RESULT_OK, intent);
-		finish();
 	}
 	
 	private class GroupListAdapter extends BaseAdapter {
@@ -79,6 +74,18 @@ public class GroupChoiceActivity extends ListActivity {
 			
 			return convertView;
 		}
+	}
+	
+	@Override
+	protected void onListItemClick(ListView l, View v, int position, long id) {
+		super.onListItemClick(l, v, position, id);
 		
+		Group group = groups.get(position);
+		
+		Intent intent = new Intent();
+		intent.putExtra("groupId", group.getId());
+		intent.putExtra("groupName", group.getName());
+		setResult(RESULT_OK, intent);
+		finish();
 	}
 }

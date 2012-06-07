@@ -59,11 +59,12 @@ public class MemberDatabase {
 		return groups;
 	}
 	
-	public boolean addMember(String name, String nickname, String phoneNumber) {
+	public boolean addMember(String name, String nickname, String phoneNumber, int groupId) {
 		ContentValues values = new ContentValues();
 		values.put("name", name);
 		values.put("nickname", nickname);
 		values.put("phone_number", phoneNumber);
+		values.put("group_id", groupId);
 		return db.insert(MEMBER_TABLE_NAME, null, values) != -1;
 	}
 	
