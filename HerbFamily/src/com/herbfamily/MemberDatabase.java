@@ -43,8 +43,8 @@ public class MemberDatabase {
 		return members;
 	}
 	
-	public ArrayList<String> getGroups() {
-		ArrayList<String> groups = new ArrayList<String>();
+	public ArrayList<Group> getGroups() {
+		ArrayList<Group> groups = new ArrayList<Group>();
 		
 		Cursor cursor = db.query(GROUP_TABLE_NAME, new String[]{"_id", "name"}, null, null, null, null, null);
 		if (cursor == null) {
@@ -52,7 +52,9 @@ public class MemberDatabase {
 		}
 		
 		while (cursor.moveToNext()) {
-			groups.add(cursor.getString(cursor.getColumnIndex("name")));
+			int id = cursor.getInt(cursor.getColumnIndex("_id"));
+			String name = cursor.getString(cursor.getColumnIndex("name"));
+			groups.add(new Group(id, name));
 		}
 		return groups;
 	}

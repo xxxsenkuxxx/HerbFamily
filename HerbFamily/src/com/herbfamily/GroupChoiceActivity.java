@@ -4,17 +4,20 @@ import java.util.ArrayList;
 
 import android.app.ListActivity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 public class GroupChoiceActivity extends ListActivity {
 	
-	ArrayList<String>groups = null;
+	protected static final int REQUEST_CODE = 1;
+	ArrayList<Group>groups = null;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -23,32 +26,27 @@ public class GroupChoiceActivity extends ListActivity {
 		
 		MemberDatabase database = new MemberDatabase(this);
 		groups = database.getGroups();
-		if (groups.size() == 0) {
-			
-		}
 		
 		Button buttonClose = (Button)findViewById(R.id.buttonCloseChoiceGroup);
 		buttonClose.setOnClickListener(new View.OnClickListener() {
-			
-			public void onClick(View arg0) {
+			public void onClick(View view) {
 				finish();
 			}
 		});
-		
-		Button buttonChoiceGroup = (Button)findViewById(R.id.buttonChoiceGroup);
-		if (groups.size() == 0) {
-			// 선택하면 바로 적용하면 되지 않을까?
-			buttonChoiceGroup.setEnabled(false);
-		}
-		buttonChoiceGroup.setOnClickListener(new View.OnClickListener() {
-			
-			public void onClick(View v) {
-				//TODO 
-				//choice group action
-			}
-		});
-		
 		setListAdapter(new GroupListAdapter(this));
+	}
+	
+	@Override
+	protected void onListItemClick(ListView l, View v, int position, long id) {
+		super.onListItemClick(l, v, position, id);
+		
+		Group group = groups.get(position);
+		
+		Intent intent = new Intent();
+		intent.putExtra("groupId", group.getId());
+		intent.putExtra("groupName", group.getName());
+		setResult(RESULT_OK, intent);
+		finish();
 	}
 	
 	private class GroupListAdapter extends BaseAdapter {
@@ -76,10 +74,10 @@ public class GroupChoiceActivity extends ListActivity {
 			}
 			
 			TextView groupName = (TextView)convertView.findViewById(R.id.textViewgroupName);
-			groupName.setText((String)groups.get(position));
+			Group group = groups.get(position);
+			groupName.setText(group.getName());
 			
 			return convertView;
-			
 		}
 		
 	}

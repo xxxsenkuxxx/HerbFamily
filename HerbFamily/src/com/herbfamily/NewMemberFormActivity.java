@@ -5,14 +5,18 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class NewMemberFormActivity extends Activity {
+public class NewMemberFormActivity extends Activity implements View.OnClickListener {
 	
 	private MemberDatabase memberDatabase = null;
 	private Contact contact = null;
+	
+	private Button buttonOpenGroupChoice;
+	private static final String TAG = NewMemberFormActivity.class.getSimpleName();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -76,14 +80,40 @@ public class NewMemberFormActivity extends Activity {
 			}
 		});
 		
-		Button buttonOpenGroupChoice = (Button)findViewById(R.id.buttonOpenGroupChoice);
-		buttonOpenGroupChoice.setOnClickListener(new View.OnClickListener() {
-			
-			public void onClick(View v) {
-				Intent intent = new Intent(NewMemberFormActivity.this, GroupChoiceActivity.class);
-				startActivity(intent);
-			}
-		});
-		
+		buttonOpenGroupChoice = (Button)findViewById(R.id.buttonOpenGroupChoice);
+		buttonOpenGroupChoice.setOnClickListener(this);
+//		buttonOpenGroupChoice.setOnClickListener(new View.OnClickListener() {
+//			public void onClick(View v) {
+//				
+//			}
+//		});
 	}
+	
+	
+	
+	public void onClick(View view) {
+		switch (view.getId()) {
+		case R.id.buttonOpenGroupChoice:
+			Intent intent = new Intent(NewMemberFormActivity.this, GroupChoiceActivity.class);
+			startActivityForResult(intent, GroupChoiceActivity.REQUEST_CODE);
+			break;
+		}
+	}
+	
+	@Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // earlier in startSubActivity
+        if (requestCode == GroupChoiceActivity.REQUEST_CODE) {
+        	if (resultCode == RESULT_OK) {
+        		
+        		data.getIntExtra("groupId", 0);
+        		buttonOpenGroupChoice.setText(data.getStringExtra("groupName"));
+        		
+        		Log.e(TAG, "onActivityResult["+GroupChoiceActivity.REQUEST_CODE+"]");
+        	}
+        }
+    }
+
+	
 }
