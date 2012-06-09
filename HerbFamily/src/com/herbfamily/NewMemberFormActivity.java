@@ -9,12 +9,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 public class NewMemberFormActivity extends Activity implements View.OnClickListener {
 	
 	private MemberDatabase memberDatabase = null;
 	private Contact contact = null;
 	
+	private ImageButton img_btn;
 	private Button buttonOpenGroupChoice;
 	private static final String TAG = NewMemberFormActivity.class.getSimpleName();
 	private int groupId = 0;
@@ -87,6 +89,12 @@ public class NewMemberFormActivity extends Activity implements View.OnClickListe
 		
 		buttonOpenGroupChoice = (Button)findViewById(R.id.buttonOpenGroupChoice);
 		buttonOpenGroupChoice.setOnClickListener(this);
+		
+		img_btn = (ImageButton)findViewById(R.id.choice);
+		img_btn.setBackgroundResource(R.drawable.ic_launcher);
+        
+		img_btn = (ImageButton)findViewById(R.id.choice);
+        img_btn.setOnClickListener(this);
 	}
 	
 	public void onClick(View view) {
@@ -95,6 +103,9 @@ public class NewMemberFormActivity extends Activity implements View.OnClickListe
 			Intent intent = new Intent(NewMemberFormActivity.this, GroupChoiceActivity.class);
 			startActivityForResult(intent, GroupChoiceActivity.REQUEST_CODE);
 			break;
+		case R.id.choice:
+    		Intent herb = new Intent(NewMemberFormActivity.this, Dialog.class);
+			startActivityForResult(herb, 10);
 		}
 	}
 	
@@ -105,8 +116,19 @@ public class NewMemberFormActivity extends Activity implements View.OnClickListe
         	if (resultCode == RESULT_OK) {
         		groupId = data.getIntExtra("groupId", 0);
         		buttonOpenGroupChoice.setText(data.getStringExtra("groupName"));
+        	
+        	
         	}
         }
+		if (resultCode == RESULT_OK) {
+			if (requestCode == 10) {
+				int potKind = data.getIntExtra("potKind", 0);
+		        img_btn.setBackgroundResource(potKind);
+//				Log.e(TAG, "["+potKind+"]");
+			}
+		} else {
+			Log.e(TAG, "[취소했어~");
+		}
     }
 	
 }

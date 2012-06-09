@@ -3,60 +3,83 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
-	<EditText
+
+    <ImageButton
+        android:id="@+id/choice"
+        android:layout_width="74dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.72"
+        android:src="@android:drawable/btn_star" />
+
+    <EditText
         android:id="@+id/editTextName"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:hint="Name">
+        android:hint="Name" >
+
         <requestFocus />
     </EditText>
+
     <EditText
         android:id="@+id/editTextNickname"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:hint="Nickname" />
+
     <EditText
         android:id="@+id/editTextPhoneNumber"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:hint="phone number"
         android:ems="10"
+        android:hint="phone number"
         android:inputType="phone" />
+
     <Button
         android:id="@+id/buttonOpenGroupChoice"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="그룹"/>
+        android:text="그룹" />
+
     <Button
         android:id="@+id/button1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="주기"/>
-   	<Button
-   	    android:id="@+id/button2"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="시간"/>
-	<Button
-   	    android:id="@+id/button3"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="방식"/>
-	<Button
-   	    android:id="@+id/button4"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="설정"/>
+        android:text="주기" />
+
     <Button
-        android:id="@+id/buttonSave"
+        android:id="@+id/button2"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Save" />
-    
+        android:text="시간" />
+
     <Button
-        android:id="@+id/buttonCancel"
+        android:id="@+id/button3"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Cancel" />
+        android:text="방식" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="설정" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/buttonSave"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:text="Save" />
+
+        <Button
+            android:id="@+id/buttonCancel"
+            android:layout_width="106dp"
+            android:layout_height="wrap_content"
+            android:text="Cancel" />
+    </LinearLayout>
 
 </LinearLayout>

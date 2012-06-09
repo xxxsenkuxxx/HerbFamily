@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">HerbFamily</string>
+    <string name="herb_choice">허브 고르기</string>
+
 </resources>
