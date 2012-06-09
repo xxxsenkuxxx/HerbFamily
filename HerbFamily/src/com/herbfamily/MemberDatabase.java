@@ -98,18 +98,23 @@ public class MemberDatabase {
 		private void createGroupTable(SQLiteDatabase db) {
 			db.execSQL("CREATE TABLE " + GROUP_TABLE_NAME + " (" +
 					"_id INTEGER PRIMARY KEY AUTOINCREMENT," +
-					"name TEXT NOT NULL DEFAULT '')");
+					"name TEXT NOT NULL DEFAULT ''," +
+					"member_count INTEGER NOT NULL DEFAULT 0)");
 		}
 	
 		@Override
 		public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 			if (oldVersion != newVersion) {
-	            db.execSQL("DROP TABLE IF EXISTS " + MEMBER_TABLE_NAME);
-	            db.execSQL("DROP TABLE IF EXISTS " + GROUP_TABLE_NAME);
+	            dropTables(db);
 	            
 	            createMemberTable(db);
 	            createGroupTable(db);
 			}
+		}
+
+		private void dropTables(SQLiteDatabase db) {
+			db.execSQL("DROP TABLE IF EXISTS " + MEMBER_TABLE_NAME);
+			db.execSQL("DROP TABLE IF EXISTS " + GROUP_TABLE_NAME);
 		}
 	}
 

@@ -16,4 +16,8 @@ public class Group {
 	public String getName() {
 		return name;
 	}
+
+	public int getMemberCount() {
+		return 0;
+	}
 }
