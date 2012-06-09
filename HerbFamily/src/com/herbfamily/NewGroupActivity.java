@@ -17,12 +17,14 @@ public class NewGroupActivity extends ListActivity implements
 		View.OnClickListener {
 
 	private ArrayList<Group> groups;
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.add_group);
+		
 		init();
+		
 		setupWidgets();
 	}
 
@@ -33,10 +35,8 @@ public class NewGroupActivity extends ListActivity implements
 	}
 
 	private void setupWidgets() {
-		((Button) findViewById(R.id.buttonAddNewGroup))
-				.setOnClickListener(this);
-		((Button) findViewById(R.id.buttonCancelGroup))
-				.setOnClickListener(this);
+		((Button) findViewById(R.id.buttonAddNewGroup)).setOnClickListener(this);
+		((Button) findViewById(R.id.buttonCancelGroup)).setOnClickListener(this);
 
 		setListAdapter(new GroupListAdapter(this));
 	}
@@ -65,23 +65,24 @@ public class NewGroupActivity extends ListActivity implements
 			ViewHolder holder;
 			if (convertView == null) {
 				LayoutInflater inflater = LayoutInflater.from(context);
-				convertView = inflater.inflate(R.layout.contacts_row, null);
+				convertView = inflater.inflate(R.layout.add_group_row, null);
 				
 				holder = new ViewHolder();
-				holder.groupNameTextView = (TextView)convertView.findViewById(R.id.contactName);
+				holder.groupNameTextView = (TextView)convertView.findViewById(R.id.groupNameTextView);
 				convertView.setTag(holder);
 			} else {
 				holder = (ViewHolder)convertView.getTag();
 			}
 			
 			Group group = (Group)groups.get(position);
-			holder.groupNameTextView.setText(group.getName() + "(" + group.getMemberCount() + "명)");
+			holder.groupNameTextView.setText(group.getName() + "(" + group.getMemberCount() + ")");
 			return convertView;
 		}
 		
 		private class ViewHolder {
 			private TextView groupNameTextView;
 		}
+
 	}
 
 	public void onClick(View v) {

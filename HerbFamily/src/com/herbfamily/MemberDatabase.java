@@ -66,6 +66,12 @@ public class MemberDatabase {
 		values.put("phone_number", phoneNumber);
 		values.put("group_id", groupId);
 		return db.insert(MEMBER_TABLE_NAME, null, values) != -1;
+		
+		
+//		db.rawQuery(sql, selectionArgs);
+//		db.execSQL("UPDATE " + GROUP_TABLE_NAME + "SET ");
+		
+		
 	}
 	
 	public boolean addGroup(String name) {
