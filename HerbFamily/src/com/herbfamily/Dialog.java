@@ -13,7 +13,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 public class Dialog extends Activity {
-
+	
 	@Override
 	protected void onApplyThemeResource(Resources.Theme theme, int resid, boolean first) {
 		super.onApplyThemeResource(theme,resid,first);
@@ -21,7 +21,7 @@ public class Dialog extends Activity {
 		
 		theme.applyStyle(style.Theme_Panel,true);
 		getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-		//�׵θ���ֱ�
+		//테두리 없애기
 
 		Button potButton = (Button) findViewById(R.id.back);
 		potButton.setOnClickListener(new View.OnClickListener() {
@@ -66,22 +66,6 @@ public class Dialog extends Activity {
 				finish();
 			}
 		});
-
-		
-		
-		
-//		Button potButton = (Button) findViewById(R.id.back);
-//		potButton.setOnClickListener(new View.OnClickListener() {
-//
-//			public void onClick(View v) {
-//				int potKind = 1;
-//				Intent intent = new Intent();
-//				intent.putExtra("potKind", potKind);
-//				setResult(RESULT_CANCELED, intent);
-//				finish();
-//			}
-//		});
-
 	}
 
 }

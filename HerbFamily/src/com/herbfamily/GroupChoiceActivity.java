@@ -16,7 +16,6 @@ import android.widget.TextView;
 
 public class GroupChoiceActivity extends ListActivity {
 	
-	public static final int REQUEST_CODE = 1;
 	private ArrayList<Group>groups = null;
 	
 	@Override

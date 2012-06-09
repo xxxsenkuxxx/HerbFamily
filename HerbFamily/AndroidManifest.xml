@@ -24,6 +24,6 @@
         <activity android:name=".NewMemberFormActivity" android:theme="@android:style/Theme.NoTitleBar" android:screenOrientation="portrait"/>
         <activity android:name=".NewGroupActivity" android:theme="@android:style/Theme.NoTitleBar" android:screenOrientation="portrait"/>
         <activity android:name=".GroupChoiceActivity" android:theme="@android:style/Theme.NoTitleBar" android:screenOrientation="portrait"/>
-        <activity android:theme="@android:style/Theme.Dialog" android:name="com.herbfamily.Dialog" android:label="@string/herb_choice"/>
+        <activity android:theme="@android:style/Theme.Dialog" android:name=".Dialog" android:label="@string/herb_choice"/>
     </application>
 </manifest>

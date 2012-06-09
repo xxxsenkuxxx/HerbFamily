@@ -16,7 +16,7 @@ public class NewMemberFormActivity extends Activity implements View.OnClickListe
 	private MemberDatabase memberDatabase = null;
 	private Contact contact = null;
 	
-	private ImageButton img_btn;
+	private ImageButton imgBtn;
 	private Button buttonOpenGroupChoice;
 	private static final String TAG = NewMemberFormActivity.class.getSimpleName();
 	private int groupId = 0;
@@ -90,18 +90,16 @@ public class NewMemberFormActivity extends Activity implements View.OnClickListe
 		buttonOpenGroupChoice = (Button)findViewById(R.id.buttonOpenGroupChoice);
 		buttonOpenGroupChoice.setOnClickListener(this);
 		
-		img_btn = (ImageButton)findViewById(R.id.choice);
-		img_btn.setBackgroundResource(R.drawable.ic_launcher);
-        
-		img_btn = (ImageButton)findViewById(R.id.choice);
-        img_btn.setOnClickListener(this);
+		imgBtn = (ImageButton)findViewById(R.id.choice);
+		imgBtn.setBackgroundResource(R.drawable.ic_launcher);
+        imgBtn.setOnClickListener(this);
 	}
 	
 	public void onClick(View view) {
 		switch (view.getId()) {
 		case R.id.buttonOpenGroupChoice:
 			Intent intent = new Intent(NewMemberFormActivity.this, GroupChoiceActivity.class);
-			startActivityForResult(intent, GroupChoiceActivity.REQUEST_CODE);
+			startActivityForResult(intent, Consts.GROUP_REQUEST_CODE);
 			break;
 		case R.id.choice:
     		Intent herb = new Intent(NewMemberFormActivity.this, Dialog.class);
@@ -109,25 +107,20 @@ public class NewMemberFormActivity extends Activity implements View.OnClickListe
 		}
 	}
 	
+	
+	
 	@Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == GroupChoiceActivity.REQUEST_CODE) {
-        	if (resultCode == RESULT_OK) {
+        
+        if (resultCode == RESULT_OK) {
+        	if (requestCode == Consts.GROUP_REQUEST_CODE) {
         		groupId = data.getIntExtra("groupId", 0);
         		buttonOpenGroupChoice.setText(data.getStringExtra("groupName"));
-        	
-        	
-        	}
-        }
-		if (resultCode == RESULT_OK) {
-			if (requestCode == 10) {
+        	} else if (requestCode == Consts.DIALOG_REQUEST_CODE) {
 				int potKind = data.getIntExtra("potKind", 0);
-		        img_btn.setBackgroundResource(potKind);
-//				Log.e(TAG, "["+potKind+"]");
+		        imgBtn.setBackgroundResource(potKind);
 			}
-		} else {
-			Log.e(TAG, "[취소했어~");
 		}
     }
 	
