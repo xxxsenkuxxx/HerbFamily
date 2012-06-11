@@ -53,6 +53,8 @@ Request Code 는 한곳에서 관리가 되어야 한다.
 get member count
 	-> database field 추가.
 	
+새로운 그룹명은 더 이상 사용할 수 없다.
+	
 		 
 	
 =================

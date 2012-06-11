@@ -3,15 +3,11 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Group Name"
-        android:textSize="14sp" />
     <EditText
         android:id="@+id/editTextGroupName"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:hint="그룹 이름"
         android:textSize="14sp" />
 	<Button
 	    android:id="@+id/buttonAddNewGroup"
@@ -19,13 +15,6 @@
 	    android:layout_height="wrap_content"
 	    android:textSize="14sp"
 	    android:text="Create Group"/>
-	<Button
-	    android:id="@+id/buttonCancelGroup"
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
-	    android:textSize="14sp"
-	    android:text="Cancel"/>
-	    />
 	<ListView
 		android:id="@android:id/list"
 		android:layout_width="fill_parent"

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.app.ListActivity;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class NewGroupActivity extends ListActivity implements
 		View.OnClickListener {
@@ -36,8 +38,6 @@ public class NewGroupActivity extends ListActivity implements
 
 	private void setupWidgets() {
 		((Button) findViewById(R.id.buttonAddNewGroup)).setOnClickListener(this);
-		((Button) findViewById(R.id.buttonCancelGroup)).setOnClickListener(this);
-
 		setListAdapter(new GroupListAdapter(this));
 	}
 
@@ -84,17 +84,22 @@ public class NewGroupActivity extends ListActivity implements
 		}
 
 	}
+	
+	private String TAG = "NewGroupActivity";
 
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.buttonAddNewGroup:
 			MemberDatabase database = new MemberDatabase(this);
 			EditText name = (EditText) findViewById(R.id.editTextGroupName);
-			database.addGroup(name.getText().toString());
+			if (name.getText().toString().trim().equals("")) {
+				Toast.makeText(this, "그룹 이름을 입력하세요.", Toast.LENGTH_SHORT).show();
+			} else if (database.existedGroupName(name.getText().toString())) {
+				Toast.makeText(this, "사용중인 이름입니다.", Toast.LENGTH_SHORT).show();
+			} else {
+				database.addGroup(name.getText().toString());
+			}
 			database.close();
-			break;
-		case R.id.buttonCancelGroup:
-			finish();
 			break;
 		}
 	}

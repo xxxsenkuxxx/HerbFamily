@@ -7,15 +7,18 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class MemberDatabase {
 	
+	private static final String TAG = MemberDatabase.class.getSimpleName();
 	private static final String DATABASE_NAME = "database.db";
 	private static final String MEMBER_TABLE_NAME = "members";
 	private static final String GROUP_TABLE_NAME = "groups";
 	private static final int DATABASE_VERSION = 1;
 	private DatabaseHelper databaseHelper;
 	private SQLiteDatabase db;
+	
 	
 	public MemberDatabase(Context context) {
 		databaseHelper = new DatabaseHelper(context);
@@ -76,7 +79,7 @@ public class MemberDatabase {
 	
 	public boolean addGroup(String name) {
 		ContentValues values = new ContentValues();
-		values.put("name", name);
+		values.put("name", name.trim());
 		return db.insert(GROUP_TABLE_NAME, null, values) != -1;
 	}
 	
@@ -123,5 +126,12 @@ public class MemberDatabase {
 			db.execSQL("DROP TABLE IF EXISTS " + GROUP_TABLE_NAME);
 		}
 	}
-
+	
+	public boolean existedGroupName(String groupName) {
+		Cursor cursor = db.rawQuery("SELECT * FROM " + GROUP_TABLE_NAME + " WHERE name=?", new String[] {groupName.trim()});
+		if ( cursor.getCount() > 0 ) {
+			return true;
+		}
+		return false;
+	}
 }
