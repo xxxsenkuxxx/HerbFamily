@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -33,6 +34,22 @@ public class MemberDatabase {
 		ArrayList<Member> members = new ArrayList<Member>();
 		
 		Cursor cursor = db.query(MEMBER_TABLE_NAME, new String[]{"_id", "name", "nickname"}, null, null, null, null, null);
+		if (cursor == null) {
+			return members;
+		}
+		
+		while (cursor.moveToNext()) {
+			members.add(new Member(
+					cursor.getInt(cursor.getColumnIndex("_id")), 
+					cursor.getString(cursor.getColumnIndex("name")), 
+					cursor.getString(cursor.getColumnIndex("nickname"))));
+		}
+		return members;
+	}
+	
+	public ArrayList<Member> getMembersInGroup(int groupId) {
+		ArrayList<Member> members = new ArrayList<Member>();
+		Cursor cursor = db.query(MEMBER_TABLE_NAME, new String[]{"_id", "name", "nickname"}, "group_id=" + groupId, null, null, null, null);
 		if (cursor == null) {
 			return members;
 		}
@@ -80,7 +97,7 @@ public class MemberDatabase {
 	public boolean addGroup(String name) {
 		ContentValues values = new ContentValues();
 		values.put("name", name.trim());
-		return db.insert(GROUP_TABLE_NAME, null, values) != -1;
+		return (db.insert(GROUP_TABLE_NAME, null, values) != -1);
 	}
 	
 	private class DatabaseHelper extends SQLiteOpenHelper {
@@ -134,4 +151,6 @@ public class MemberDatabase {
 		}
 		return false;
 	}
+
+	
 }
