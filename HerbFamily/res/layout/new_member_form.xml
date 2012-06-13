@@ -9,7 +9,7 @@
         android:layout_width="74dp"
         android:layout_height="wrap_content"
         android:layout_weight="0.72"
-        android:src="@android:drawable/btn_star" />
+        android:src="@drawable/pot" />
 
     <EditText
         android:id="@+id/editTextName"
