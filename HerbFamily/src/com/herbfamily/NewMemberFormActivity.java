@@ -136,6 +136,18 @@ public class NewMemberFormActivity extends Activity implements View.OnClickListe
 
 		case R.id.timeBtn:
 
+				TimePickerDialog.OnTimeSetListener mTimeSetListener = 
+				new TimePickerDialog.OnTimeSetListener() {
+					public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+						Toast.makeText(NewMemberFormActivity.this,
+						"Time is=" + hourOfDay + ":" + minute, Toast.LENGTH_SHORT)
+						.show();
+					}
+				};
+				TimePickerDialog alert = new TimePickerDialog(this, 
+			mTimeSetListener, 0, 0, false);
+				alert.show();
+
 			break;
 			
 		case R.id.alarmTypeBtn:
