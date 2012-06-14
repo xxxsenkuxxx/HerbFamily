@@ -9,7 +9,7 @@
         android:layout_width="74dp"
         android:layout_height="wrap_content"
         android:layout_weight="0.72"
-        android:src="@drawable/pot" />
+        android:background="@drawable/pot" />
 
     <EditText
         android:id="@+id/editTextName"
@@ -41,25 +41,25 @@
         android:text="그룹" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/cycleBtn"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="주기" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/timeBtn"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="시간" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/alarmTypeBtn"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="방식" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/alarmToneBtn"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="설정" />
